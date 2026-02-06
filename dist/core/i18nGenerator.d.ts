@@ -10,7 +10,7 @@ export declare class I18nGenerator {
     generateI18nFiles(strings: ExtractedString[], config?: Partial<I18nConfig>): Promise<void>;
     private generateConstantsFile;
     private generateTranslationFile;
-    generateLingoDevConfig(): Promise<void>;
+    generateLingoDevConfig(targetLanguages?: string[]): Promise<void>;
     runLingoDev(): Promise<void>;
 }
 //# sourceMappingURL=i18nGenerator.d.ts.map

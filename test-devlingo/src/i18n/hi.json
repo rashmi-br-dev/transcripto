@@ -1,0 +1,12 @@
+{
+  "root": "root",
+  "app": "App",
+  "appheader": "App-header",
+  "welcome_to_my_application": "Welcome to My Application",
+  "please_login_to_continue": "Please login to continue",
+  "login": "Login",
+  "forgot_password": "Forgot Password?",
+  "dashboard": "Dashboard",
+  "your_profile_information": "Your profile information",
+  "user_settings": "User Settings"
+}

@@ -1,0 +1,10 @@
+{
+  "source": "./src/i18n/en.json",
+  "target": [
+    "hi",
+    "es",
+    "fr"
+  ],
+  "output": "./src/i18n",
+  "format": "json"
+}

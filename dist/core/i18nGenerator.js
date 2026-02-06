@@ -82,10 +82,10 @@ export type TextKey = keyof typeof TEXT;
         const content = JSON.stringify(translations, null, 2);
         await fs_1.promises.writeFile(filePath, content, 'utf-8');
     }
-    async generateLingoDevConfig() {
+    async generateLingoDevConfig(targetLanguages = ['hi', 'kn']) {
         const config = {
             source: './src/i18n/en.json',
-            target: ['hi', 'kn'],
+            target: targetLanguages,
             output: './src/i18n',
             format: 'json'
         };
