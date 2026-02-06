@@ -70,7 +70,7 @@ async function generateCommand() {
         console.log(chalk_1.default.gray(`📁 Constants: ${languageConfig.constantsFile}`));
         console.log(chalk_1.default.gray(`📁 Translations: ${languageConfig.outputDir}/`));
         console.log(chalk_1.default.gray(`🌍 Languages: ${languageConfig.languages.join(', ')}`));
-        // Ask if user wants to run lingo.dev
+        // Ask if user wants to run lingo.dev (now automatic)
         const shouldRunLingoDev = await askToRunLingoDev();
         if (shouldRunLingoDev) {
             console.log(chalk_1.default.yellow('\n🌐 Running lingo.dev for translations...'));
@@ -85,6 +85,14 @@ async function generateCommand() {
             }
             catch (error) {
                 console.log(chalk_1.default.yellow('⚠️  lingo.dev failed. You can run "npx lingo.dev@latest run" manually.'));
+            }
+        }
+        else {
+            console.log(chalk_1.default.cyan('ℹ️  Skipping lingo.dev translations'));
+            // Still create language dropdown for manual switching
+            const shouldCreateDropdown = await askToCreateDropdown();
+            if (shouldCreateDropdown) {
+                await createLanguageDropdown(languageConfig);
             }
         }
         console.log(chalk_1.default.yellow('\n🎯 Next steps:'));
@@ -395,32 +403,12 @@ async function promptForConstantsFile(outputDir) {
     });
 }
 async function askToRunLingoDev() {
-    const readline = await Promise.resolve().then(() => __importStar(require('readline')));
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
-    return new Promise((resolve) => {
-        rl.question('\nRun lingo.dev for AI translations? (Y/n): ', (answer) => {
-            rl.close();
-            const response = answer.trim().toLowerCase();
-            resolve(response !== 'n' && response !== 'no');
-        });
-    });
+    // Always return true to run lingo.dev automatically
+    return true;
 }
 async function askToCreateDropdown() {
-    const readline = await Promise.resolve().then(() => __importStar(require('readline')));
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
-    return new Promise((resolve) => {
-        rl.question('\nCreate language dropdown component for your project? (Y/n): ', (answer) => {
-            rl.close();
-            const response = answer.trim().toLowerCase();
-            resolve(response !== 'n' && response !== 'no');
-        });
-    });
+    // Always return true to create language dropdown automatically
+    return true;
 }
 async function loadExtractedStrings() {
     try {

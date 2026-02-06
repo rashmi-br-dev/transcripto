@@ -47,7 +47,7 @@ export class I18nGenerator {
     const content = `// Auto-generated localization constants
 export const TEXT = {
 ${constants.join(',\n')}
-};
+} as const;
 
 export type TextKey = keyof typeof TEXT;
 `;
