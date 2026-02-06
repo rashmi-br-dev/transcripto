@@ -144,21 +144,25 @@ class StringExtractor {
         if (!text || text.length < this.minStringLength) {
             return false;
         }
-        // Check if it's likely UI text (contains letters)
-        if (!/[a-zA-Z]/.test(text)) {
+        // Check if it's likely UI text (contains letters and spaces)
+        const hasLetters = /[a-zA-Z]/.test(text);
+        const hasSpaces = /\s/.test(text);
+        const isSentence = /[.!?]$/.test(text);
+        const isPhrase = text.split(' ').length >= 2;
+        // Must have letters and either spaces or be a complete sentence
+        if (!hasLetters) {
             return false;
         }
-        // Check exclude patterns
-        for (const pattern of this.excludePatterns) {
-            if (pattern.test(text)) {
-                return false;
-            }
+        // Accept if it has spaces (likely a phrase) or is a complete sentence
+        if (hasSpaces || isSentence || isPhrase) {
+            return true;
         }
-        // Exclude very technical strings
-        if (text.includes('=>') || text.includes('function') || text.includes('const ')) {
-            return false;
+        // For single words, only accept if they're longer and look like UI text
+        if (text.length >= 4 && /^[A-Z][a-z]+$/.test(text)) {
+            return true;
         }
-        return true;
+        // Reject technical strings, single words, or very short strings
+        return false;
     }
     isUIText(path) {
         const parent = path.parent;
@@ -222,13 +226,24 @@ class StringExtractor {
         const envPatterns = /^[A-Z_]+$/;
         // Technical identifiers (short, lowercase with underscores/hyphens)
         const technicalPatterns = /^[a-z][a-z0-9_-]*$/;
+        // Additional patterns for React-specific technical strings
+        const reactPatterns = /^(app|src|component|element|container|wrapper|header|footer|nav|sidebar|content|main|root)([A-Z][a-z0-9]*)*$/;
+        // Check if it's a CSS class or ID pattern
+        const cssPatterns = /^[a-z][a-z0-9-]*-[a-z][a-z0-9-]*$/;
+        // Check if it's a file path or component name
+        const filePathPatterns = /^[a-z][a-z0-9]*\.[a-z]+$/;
         // Check against all patterns
         return domIds.includes(text) ||
             packageNames.includes(text) ||
             filePatterns.test(text) ||
             urlPatterns.test(text) ||
             envPatterns.test(text) ||
-            (technicalPatterns.test(text) && text.length < 20);
+            (technicalPatterns.test(text) && text.length < 20) ||
+            reactPatterns.test(text) ||
+            cssPatterns.test(text) ||
+            filePathPatterns.test(text) ||
+            text.includes('.') && text.includes('/') ||
+            text.includes('_') && text.length < 15;
     }
     generateKey(text) {
         return text
