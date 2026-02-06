@@ -126,12 +126,12 @@ async function performFullWorkflow(yes) {
     const generator = new i18nGenerator_1.I18nGenerator();
     const config = {
         outputDir: './src/i18n',
-        languages: ['en', 'hi', 'es', 'fr'],
+        languages: ['en'], // Start with just English, lingo.dev will add more
         constantsFile: './src/i18n/constants.ts',
         keyPrefix: ''
     };
     await generator.generateI18nFiles(strings, config);
-    await generator.generateLingoDevConfig(['hi', 'es', 'fr']);
+    await generator.generateLingoDevConfig(); // Let lingo.dev decide target languages
     // Run lingo.dev automatically
     try {
         await generator.runLingoDev();

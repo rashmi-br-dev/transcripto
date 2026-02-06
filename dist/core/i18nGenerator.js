@@ -82,7 +82,7 @@ export type TextKey = keyof typeof TEXT;
         const content = JSON.stringify(translations, null, 2);
         await fs_1.promises.writeFile(filePath, content, 'utf-8');
     }
-    async generateLingoDevConfig(targetLanguages = ['hi', 'es', 'fr']) {
+    async generateLingoDevConfig() {
         // First, delete any existing lingo.dev config to ensure clean setup
         try {
             await fs_1.promises.unlink('.lingodev.json');
@@ -91,15 +91,16 @@ export type TextKey = keyof typeof TEXT;
         catch {
             // Config doesn't exist, that's fine
         }
+        // Let lingo.dev handle target languages automatically - don't specify any
         const config = {
             source: './src/i18n/en.json',
-            target: targetLanguages,
+            // target: [] - Let lingo.dev decide automatically
             output: './src/i18n',
             format: 'json'
         };
         const content = JSON.stringify(config, null, 2);
         await fs_1.promises.writeFile('.lingodev.json', content, 'utf-8');
-        console.log('📁 Created lingo.dev config with src/i18n output directory');
+        console.log('📁 Created lingo.dev config with automatic language selection');
     }
     async runLingoDev() {
         const { spawn } = await Promise.resolve().then(() => __importStar(require('child_process')));

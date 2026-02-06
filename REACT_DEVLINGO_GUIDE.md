@@ -38,6 +38,7 @@ Create a new directory for your React app:
 mkdir my-localized-app
 cd my-localized-app
 
+
 # Initialize React project
 npx create-react-app . --template typescript
 ```

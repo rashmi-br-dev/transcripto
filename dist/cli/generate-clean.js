@@ -62,8 +62,8 @@ async function generateCommand() {
         // Generate i18n files
         const generator = new i18nGenerator_1.I18nGenerator();
         await generator.generateI18nFiles(strings, languageConfig);
-        // Generate lingo.dev config with user's target languages
-        await generator.generateLingoDevConfig(languageConfig.languages.filter(lang => lang !== 'en'));
+        // Generate lingo.dev config with automatic language handling
+        await generator.generateLingoDevConfig(); // Let lingo.dev decide target languages
         // Generate welcome.md with extracted text
         await generateWelcomeFile(strings, languageConfig);
         console.log(chalk_1.default.green(`✅ Generated i18n files for ${strings.length} strings`));

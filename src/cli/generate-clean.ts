@@ -33,8 +33,8 @@ export async function generateCommand(): Promise<void> {
     const generator = new I18nGenerator();
     await generator.generateI18nFiles(strings, languageConfig);
 
-    // Generate lingo.dev config with user's target languages
-    await generator.generateLingoDevConfig(languageConfig.languages.filter(lang => lang !== 'en'));
+    // Generate lingo.dev config with automatic language handling
+    await generator.generateLingoDevConfig(); // Let lingo.dev decide target languages
 
     // Generate welcome.md with extracted text
     await generateWelcomeFile(strings, languageConfig);

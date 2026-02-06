@@ -10,7 +10,7 @@ export declare class I18nGenerator {
     generateI18nFiles(strings: ExtractedString[], config?: Partial<I18nConfig>): Promise<void>;
     private generateConstantsFile;
     private generateTranslationFile;
-    generateLingoDevConfig(targetLanguages?: string[]): Promise<void>;
+    generateLingoDevConfig(): Promise<void>;
     runLingoDev(): Promise<void>;
     private initializeLingoDev;
 }
