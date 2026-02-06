@@ -122,7 +122,7 @@ async function performFullWorkflow(yes) {
         console.log(chalk_1.default.yellow('⚠️  No strings found'));
         return;
     }
-    // Generate i18n files
+    // Generate i18n files using same config as generate command
     const generator = new i18nGenerator_1.I18nGenerator();
     const config = {
         outputDir: './src/i18n',

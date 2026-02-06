@@ -102,7 +102,7 @@ async function performFullWorkflow(yes: boolean): Promise<void> {
     return;
   }
 
-  // Generate i18n files
+  // Generate i18n files using same config as generate command
   const generator = new I18nGenerator();
   const config = {
     outputDir: './src/i18n',
