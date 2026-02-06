@@ -81,33 +81,21 @@ async function generateCommand() {
         console.log(chalk_1.default.gray(`📁 Constants: ${languageConfig.constantsFile}`));
         console.log(chalk_1.default.gray(`📁 Translations: ${languageConfig.outputDir}/`));
         console.log(chalk_1.default.gray(`🌍 Languages: ${languageConfig.languages.join(', ')}`));
-        // Ask if user wants to run lingo.dev (now automatic)
-        const shouldRunLingoDev = await askToRunLingoDev();
-        if (shouldRunLingoDev) {
-            console.log(chalk_1.default.yellow('\n🌐 Running lingo.dev for translations...'));
-            try {
-                await generator.runLingoDev();
-                console.log(chalk_1.default.green('✅ lingo.dev translations completed!'));
-                // Ask if user wants to create language dropdown
-                const shouldCreateDropdown = await askToCreateDropdown();
-                if (shouldCreateDropdown) {
-                    await createLanguageDropdown(languageConfig);
-                }
-            }
-            catch (error) {
-                console.log(chalk_1.default.yellow('⚠️  lingo.dev failed. You can run "npx lingo.dev@latest run" manually.'));
-            }
+        // Run lingo.dev automatically
+        console.log(chalk_1.default.cyan('🌐 Running lingo.dev for translations...'));
+        try {
+            await generator.runLingoDev();
+            console.log(chalk_1.default.green('✅ lingo.dev translations completed!'));
+            // Ask if user wants to create language dropdown (now automatic)
+            const shouldCreateDropdown = true; // Always create dropdown
+            await createLanguageDropdown(languageConfig);
         }
-        else {
-            console.log(chalk_1.default.cyan('ℹ️  Skipping lingo.dev translations'));
-            // Still create language dropdown for manual switching
-            const shouldCreateDropdown = await askToCreateDropdown();
-            if (shouldCreateDropdown) {
-                await createLanguageDropdown(languageConfig);
-            }
+        catch (error) {
+            console.log(chalk_1.default.yellow('⚠️  lingo.dev failed. You can run "npx lingo.dev@latest run" manually.'));
         }
-        console.log(chalk_1.default.yellow('\n🎯 Next steps:'));
-        console.log(chalk_1.default.white('  devlingo replace - Replace inline text with constants'));
+        console.log(chalk_1.default.cyan('\n🎯 Next steps:'));
+        console.log(chalk_1.default.white('  npm start - Test your localized application'));
+        console.log(chalk_1.default.gray('💡 Text is ready for translation. Use constants in your React components.'));
     }
     catch (error) {
         console.error(chalk_1.default.red('❌ Generation failed:'), error);

@@ -58,35 +58,23 @@ export async function generateCommand(): Promise<void> {
     console.log(chalk.gray(`📁 Translations: ${languageConfig.outputDir}/`));
     console.log(chalk.gray(`🌍 Languages: ${languageConfig.languages.join(', ')}`));
 
-    // Ask if user wants to run lingo.dev (now automatic)
-    const shouldRunLingoDev = await askToRunLingoDev();
-    if (shouldRunLingoDev) {
-      console.log(chalk.yellow('\n🌐 Running lingo.dev for translations...'));
+    // Run lingo.dev automatically
+    console.log(chalk.cyan('🌐 Running lingo.dev for translations...'));
+    
+    try {
+      await generator.runLingoDev();
+      console.log(chalk.green('✅ lingo.dev translations completed!'));
       
-      try {
-        await generator.runLingoDev();
-        console.log(chalk.green('✅ lingo.dev translations completed!'));
-        
-        // Ask if user wants to create language dropdown
-        const shouldCreateDropdown = await askToCreateDropdown();
-        if (shouldCreateDropdown) {
-          await createLanguageDropdown(languageConfig);
-        }
-      } catch (error) {
-        console.log(chalk.yellow('⚠️  lingo.dev failed. You can run "npx lingo.dev@latest run" manually.'));
-      }
-    } else {
-      console.log(chalk.cyan('ℹ️  Skipping lingo.dev translations'));
-      
-      // Still create language dropdown for manual switching
-      const shouldCreateDropdown = await askToCreateDropdown();
-      if (shouldCreateDropdown) {
-        await createLanguageDropdown(languageConfig);
-      }
+      // Ask if user wants to create language dropdown (now automatic)
+      const shouldCreateDropdown = true; // Always create dropdown
+      await createLanguageDropdown(languageConfig);
+    } catch (error) {
+      console.log(chalk.yellow('⚠️  lingo.dev failed. You can run "npx lingo.dev@latest run" manually.'));
     }
 
-    console.log(chalk.yellow('\n🎯 Next steps:'));
-    console.log(chalk.white('  devlingo replace - Replace inline text with constants'));
+    console.log(chalk.cyan('\n🎯 Next steps:'));
+    console.log(chalk.white('  npm start - Test your localized application'));
+    console.log(chalk.gray('💡 Text is ready for translation. Use constants in your React components.'));
 
   } catch (error) {
     console.error(chalk.red('❌ Generation failed:'), error);
