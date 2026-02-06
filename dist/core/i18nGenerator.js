@@ -105,7 +105,7 @@ export type TextKey = keyof typeof TEXT;
         }
         // Then run lingo.dev
         return new Promise((resolve, reject) => {
-            const process = spawn('npx', ['lingo.dev@latest', 'run', '--yes'], {
+            const process = spawn('npx', ['lingo.dev@latest', 'run'], {
                 stdio: 'inherit',
                 shell: true
             });
@@ -123,7 +123,7 @@ export type TextKey = keyof typeof TEXT;
     async initializeLingoDev() {
         const { spawn } = await Promise.resolve().then(() => __importStar(require('child_process')));
         return new Promise((resolve, reject) => {
-            const process = spawn('npx', ['lingo.dev@latest', 'init', '--yes'], {
+            const process = spawn('npx', ['lingo.dev@latest', 'init'], {
                 stdio: 'inherit',
                 shell: true
             });
