@@ -72,7 +72,7 @@ export type TextKey = keyof typeof TEXT;
     await fs.writeFile(filePath, content, 'utf-8');
   }
 
-  async generateLingoDevConfig(targetLanguages: string[] = ['hi', 'kn']): Promise<void> {
+  async generateLingoDevConfig(targetLanguages: string[] = ['hi', 'es', 'fr']): Promise<void> {
     const config = {
       source: './src/i18n/en.json',
       target: targetLanguages,
@@ -98,7 +98,7 @@ export type TextKey = keyof typeof TEXT;
     
     // Then run lingo.dev
     return new Promise((resolve, reject) => {
-      const process = spawn('npx', ['lingo.dev@latest', 'run'], {
+      const process = spawn('npx', ['lingo.dev@latest', 'run', '--yes'], {
         stdio: 'inherit',
         shell: true
       });
@@ -119,7 +119,7 @@ export type TextKey = keyof typeof TEXT;
     const { spawn } = await import('child_process');
     
     return new Promise((resolve, reject) => {
-      const process = spawn('npx', ['lingo.dev@latest', 'init'], {
+      const process = spawn('npx', ['lingo.dev@latest', 'init', '--yes'], {
         stdio: 'inherit',
         shell: true
       });
