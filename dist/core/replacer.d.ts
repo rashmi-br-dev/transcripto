@@ -10,5 +10,6 @@ export declare class TextReplacer {
     private replaceInFile;
     private addImport;
     private isUIText;
+    private isTechnicalString;
 }
 //# sourceMappingURL=replacer.d.ts.map

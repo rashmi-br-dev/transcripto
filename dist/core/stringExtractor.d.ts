@@ -14,6 +14,7 @@ export declare class StringExtractor {
     private extractFromFile;
     private isValidString;
     private isUIText;
+    private isTechnicalString;
     private generateKey;
     private deduplicateStrings;
 }

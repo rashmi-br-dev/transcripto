@@ -152,6 +152,11 @@ class TextReplacer {
     }
     isUIText(path) {
         const parent = path.parent;
+        const text = path.node.value;
+        // Exclude technical strings that should never be localized
+        if (this.isTechnicalString(text)) {
+            return false;
+        }
         // Exclude keys in objects
         if (t.isObjectProperty(parent) && parent.key === path.node) {
             return false;
@@ -160,10 +165,24 @@ class TextReplacer {
         if (t.isImportDeclaration(parent)) {
             return false;
         }
+        // Exclude import() calls (dynamic imports)
+        if (t.isCallExpression(parent) &&
+            parent.callee.type === 'Import') {
+            return false;
+        }
         // Exclude require calls
         if (t.isCallExpression(parent) &&
             t.isIdentifier(parent.callee) &&
             parent.callee.name === 'require') {
+            return false;
+        }
+        // Exclude document.getElementById calls
+        if (t.isCallExpression(parent) &&
+            t.isMemberExpression(parent.callee) &&
+            t.isIdentifier(parent.callee.object) &&
+            parent.callee.object.name === 'document' &&
+            t.isIdentifier(parent.callee.property) &&
+            parent.callee.property.name === 'getElementById') {
             return false;
         }
         // Exclude variable declarations that look like constants
@@ -172,7 +191,34 @@ class TextReplacer {
             /^[A-Z_]+$/.test(parent.id.name)) {
             return false;
         }
+        // Exclude test function names
+        if (t.isCallExpression(parent) &&
+            t.isIdentifier(parent.callee) &&
+            parent.callee.name === 'test') {
+            return false;
+        }
         return true;
+    }
+    isTechnicalString(text) {
+        // DOM IDs that should never be localized
+        const domIds = ['root', 'app', 'main', 'header', 'footer', 'nav', 'sidebar', 'content'];
+        // Package names that should never be localized
+        const packageNames = ['web-vitals', 'react', 'react-dom', 'react-scripts'];
+        // File extensions and paths
+        const filePatterns = /\.(js|ts|tsx|jsx|json|css|html|svg|png|jpg|jpeg|gif|ico)$/;
+        // URLs and protocols
+        const urlPatterns = /^(https?:\/\/|ftp:\/\/|mailto:|tel:)/;
+        // Environment variables and config keys
+        const envPatterns = /^[A-Z_]+$/;
+        // Technical identifiers
+        const technicalPatterns = /^[a-z][a-z0-9_-]*$/;
+        // Check against all patterns
+        return domIds.includes(text) ||
+            packageNames.includes(text) ||
+            filePatterns.test(text) ||
+            urlPatterns.test(text) ||
+            envPatterns.test(text) ||
+            (technicalPatterns.test(text) && text.length < 20);
     }
 }
 exports.TextReplacer = TextReplacer;
