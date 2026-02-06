@@ -1,20 +1,34 @@
 import { promises as fs } from 'fs';
 import chalk from 'chalk';
 import { I18nGenerator } from '../core/i18nGenerator';
+import { ProjectScanner } from '../core/projectScanner';
+import { StringExtractor } from '../core/stringExtractor';
 import { ExtractedString } from '../core/stringExtractor';
 
 export async function generateCommand(): Promise<void> {
   console.log(chalk.blue('📝 Generating i18n files...'));
 
   try {
-    // Load extracted strings
-    const strings = await loadExtractedStrings();
+    // Automatically scan the project first
+    console.log(chalk.cyan('🔍 Scanning project for UI text strings...'));
+    const scanner = new ProjectScanner();
+    const files = await scanner.scanProject('./src');
+    
+    const extractor = new StringExtractor();
+    const strings = await extractor.extractStrings(files);
     
     if (strings.length === 0) {
-      console.log(chalk.yellow('⚠️  No strings found. Run "devlingo scan" first.'));
+      console.log(chalk.yellow('⚠️  No UI text strings found in the project.'));
+      console.log(chalk.gray('💡 Make sure your React components have text content to extract.'));
       return;
     }
 
+    console.log(chalk.green(`✅ Found ${strings.length} UI text strings`));
+    
+    // Save extracted strings for future use
+    await fs.mkdir('.devlingo', { recursive: true });
+    await fs.writeFile('.devlingo/extracted-strings.json', JSON.stringify(strings, null, 2), 'utf-8');
+    
     // Check if lingo.dev is configured
     const hasLingoDevConfig = await checkLingoDevConfig();
     
