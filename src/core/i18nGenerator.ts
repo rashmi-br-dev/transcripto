@@ -26,33 +26,10 @@ export class I18nGenerator {
     // Create output directory
     await fs.mkdir(finalConfig.outputDir, { recursive: true });
 
-    // Generate constants file
-    await this.generateConstantsFile(strings, finalConfig);
-
-    // Generate translation files for each language
+    // Generate translation files only (no constants file)
     for (const language of finalConfig.languages) {
       await this.generateTranslationFile(strings, language, finalConfig);
     }
-  }
-
-  private async generateConstantsFile(
-    strings: ExtractedString[], 
-    config: I18nConfig
-  ): Promise<void> {
-    const constants = strings.map(str => {
-      const key = config.keyPrefix + str.key.toUpperCase();
-      return `  ${key}: "${str.key}"`;
-    });
-
-    const content = `// Auto-generated localization constants
-export const TEXT = {
-${constants.join(',\n')}
-} as const;
-
-export type TextKey = keyof typeof TEXT;
-`;
-
-    await fs.writeFile(config.constantsFile, content, 'utf-8');
   }
 
   private async generateTranslationFile(

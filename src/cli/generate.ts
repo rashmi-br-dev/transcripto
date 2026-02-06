@@ -43,7 +43,7 @@ export async function generateCommand(): Promise<void> {
     // Get language configuration from user
     const languageConfig = await getLanguageConfiguration();
 
-    // Generate i18n files
+    // Generate i18n files (only JSON, no constants)
     const generator = new I18nGenerator();
     await generator.generateI18nFiles(strings, languageConfig);
 
@@ -54,7 +54,6 @@ export async function generateCommand(): Promise<void> {
     await generateWelcomeFile(strings, languageConfig);
 
     console.log(chalk.green(`✅ Generated i18n files for ${strings.length} strings`));
-    console.log(chalk.gray(`📁 Constants: ${languageConfig.constantsFile}`));
     console.log(chalk.gray(`📁 Translations: ${languageConfig.outputDir}/`));
     console.log(chalk.gray(`🌍 Languages: ${languageConfig.languages.join(', ')}`));
 
@@ -302,11 +301,10 @@ async function getLanguageConfiguration() {
   console.log(chalk.cyan('\n🌍 Language Configuration'));
   
   // Skip language selection - let lingo.dev handle it completely automatically
-  console.log(chalk.yellow('🤖 Letting lingo.dev handle language selection automatically...'));
+  console.log(chalk.yellow('🤖 Letting lingo.dev handle language selection completely automatically...'));
   
   // Use default configuration - only English for now, lingo.dev will add more
   const outputDir = './src/i18n';
-  const constantsFile = './src/i18n/constants.ts';
   
   // Start with just English - lingo.dev will add target languages automatically
   const languages = ['en'];
@@ -314,7 +312,6 @@ async function getLanguageConfiguration() {
   return {
     outputDir,
     languages,
-    constantsFile,
     keyPrefix: ''
   };
 }
