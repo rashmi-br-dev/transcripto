@@ -204,7 +204,7 @@ DevLingo automatically integrates with lingo.dev for professional translations:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/devlingo.git
+git clone https://github.com/brrashmi408-sys/devlingo-npm
 cd devlingo
 
 # Install dependencies
