@@ -6,17 +6,19 @@ import { scanCommand } from './scan';
 import { replaceCommand } from './replace';
 import { generateCommand } from './generate';
 import { reportCommand } from './report';
+import { watchCommand } from './watch';
 
 const program = new Command();
 
 program
   .name('devlingo')
   .description('Automated localization CLI that scans projects and generates i18n files')
-  .version('1.0.0');
+  .version('1.1.5');
 
 program
   .command('init')
   .description('Initialize DevLingo in your project')
+  .option('--yes', 'Run in non-interactive mode')
   .action(initCommand);
 
 program
@@ -33,6 +35,12 @@ program
   .command('generate')
   .description('Generate i18n translation files')
   .action(generateCommand);
+
+program
+  .command('watch')
+  .description('Watch for file changes and auto-update translations')
+  .option('--yes', 'Run in non-interactive mode')
+  .action(watchCommand);
 
 program
   .command('report')

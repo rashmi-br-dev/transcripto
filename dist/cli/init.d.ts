@@ -1,2 +1,2 @@
-export declare function initCommand(): Promise<void>;
+export declare function initCommand(options?: any): Promise<void>;
 //# sourceMappingURL=init.d.ts.map

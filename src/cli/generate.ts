@@ -299,24 +299,19 @@ export default LanguageDropdown;
 async function getLanguageConfiguration() {
   console.log(chalk.cyan('\n🌍 Language Configuration'));
   
-  // Get source language (default to English)
-  const sourceLanguage = await promptForLanguage('Source language (text will be extracted from this language):', 'en');
+  // Skip language selection - let lingo.dev handle it automatically
+  console.log(chalk.yellow('🤖 Letting lingo.dev handle language selection automatically...'));
   
-  // Get target languages
-  const targetLanguages = await promptForTargetLanguages();
+  // Use default configuration
+  const outputDir = './src/i18n';
+  const constantsFile = './src/i18n/constants.ts';
   
-  // Include source language in list
-  const allLanguages = [sourceLanguage, ...targetLanguages.filter(lang => lang !== sourceLanguage)];
-  
-  // Get output directory
-  const outputDir = await promptForOutputDirectory();
-  
-  // Get constants file path
-  const constantsFile = await promptForConstantsFile(outputDir);
+  // Default to English + common languages
+  const languages = ['en', 'hi', 'es', 'fr'];
 
   return {
     outputDir,
-    languages: allLanguages,
+    languages,
     constantsFile,
     keyPrefix: ''
   };

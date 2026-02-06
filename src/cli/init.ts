@@ -2,8 +2,14 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import chalk from 'chalk';
 
-export async function initCommand(): Promise<void> {
+export async function initCommand(options: any = {}): Promise<void> {
   console.log(chalk.blue('🚀 Initializing DevLingo in your project...'));
+  
+  const yes = options.yes || false;
+  
+  if (yes) {
+    console.log(chalk.yellow('🤖 Running in non-interactive mode (--yes)'));
+  }
 
   try {
     // Create .devlingo directory
@@ -11,15 +17,15 @@ export async function initCommand(): Promise<void> {
 
     // Create config file
     const config = {
-      version: '1.0.0',
+      version: '1.1.5',
       scan: {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.html'],
-        exclude: ['node_modules', 'dist', 'build', '.git', 'coverage'],
+        exclude: ['node_modules', 'dist', 'build', '.git', 'coverage', 'src/i18n'],
         minStringLength: 2
       },
       i18n: {
         outputDir: './src/i18n',
-        languages: ['en', 'hi', 'kn'],
+        languages: ['en', 'hi', 'es', 'fr'],
         constantsFile: './src/i18n/constants.ts',
         keyPrefix: ''
       },

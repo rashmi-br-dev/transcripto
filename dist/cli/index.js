@@ -7,14 +7,16 @@ const scan_1 = require("./scan");
 const replace_1 = require("./replace");
 const generate_1 = require("./generate");
 const report_1 = require("./report");
+const watch_1 = require("./watch");
 const program = new commander_1.Command();
 program
     .name('devlingo')
     .description('Automated localization CLI that scans projects and generates i18n files')
-    .version('1.0.0');
+    .version('1.1.5');
 program
     .command('init')
     .description('Initialize DevLingo in your project')
+    .option('--yes', 'Run in non-interactive mode')
     .action(init_1.initCommand);
 program
     .command('scan')
@@ -28,6 +30,11 @@ program
     .command('generate')
     .description('Generate i18n translation files')
     .action(generate_1.generateCommand);
+program
+    .command('watch')
+    .description('Watch for file changes and auto-update translations')
+    .option('--yes', 'Run in non-interactive mode')
+    .action(watch_1.watchCommand);
 program
     .command('report')
     .description('Show localization coverage report')

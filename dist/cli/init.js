@@ -6,22 +6,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.initCommand = initCommand;
 const fs_1 = require("fs");
 const chalk_1 = __importDefault(require("chalk"));
-async function initCommand() {
+async function initCommand(options = {}) {
     console.log(chalk_1.default.blue('🚀 Initializing DevLingo in your project...'));
+    const yes = options.yes || false;
+    if (yes) {
+        console.log(chalk_1.default.yellow('🤖 Running in non-interactive mode (--yes)'));
+    }
     try {
         // Create .devlingo directory
         await fs_1.promises.mkdir('.devlingo', { recursive: true });
         // Create config file
         const config = {
-            version: '1.0.0',
+            version: '1.1.5',
             scan: {
                 extensions: ['.ts', '.tsx', '.js', '.jsx', '.html'],
-                exclude: ['node_modules', 'dist', 'build', '.git', 'coverage'],
+                exclude: ['node_modules', 'dist', 'build', '.git', 'coverage', 'src/i18n'],
                 minStringLength: 2
             },
             i18n: {
                 outputDir: './src/i18n',
-                languages: ['en', 'hi', 'kn'],
+                languages: ['en', 'hi', 'es', 'fr'],
                 constantsFile: './src/i18n/constants.ts',
                 keyPrefix: ''
             },
