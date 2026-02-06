@@ -1,6 +1,6 @@
 {
   "name": "devlingo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automated localization CLI that scans projects and generates i18n files",
   "main": "dist/index.js",
   "bin": {
