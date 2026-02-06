@@ -73,6 +73,14 @@ export type TextKey = keyof typeof TEXT;
   }
 
   async generateLingoDevConfig(targetLanguages: string[] = ['hi', 'es', 'fr']): Promise<void> {
+    // First, delete any existing lingo.dev config to ensure clean setup
+    try {
+      await fs.unlink('.lingodev.json');
+      console.log('🗑️  Removed existing lingo.dev config');
+    } catch {
+      // Config doesn't exist, that's fine
+    }
+
     const config = {
       source: './src/i18n/en.json',
       target: targetLanguages,
@@ -82,6 +90,7 @@ export type TextKey = keyof typeof TEXT;
 
     const content = JSON.stringify(config, null, 2);
     await fs.writeFile('.lingodev.json', content, 'utf-8');
+    console.log('📁 Created lingo.dev config with src/i18n output directory');
   }
 
   async runLingoDev(): Promise<void> {
@@ -105,6 +114,7 @@ export type TextKey = keyof typeof TEXT;
 
       process.on('close', (code) => {
         if (code === 0) {
+          console.log('✅ lingo.dev translations completed successfully!');
           resolve();
         } else {
           reject(new Error(`lingo.dev process exited with code ${code}`));
