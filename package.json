@@ -1,6 +1,6 @@
 {
   "name": "devlingo",
-  "version": "1.1.14",
+  "version": "1.1.15",
   "description": "Enhanced DevLingo CLI - Interactive localization with automatic lingo.dev integration and language dropdown generation",
   "main": "dist/index.js",
   "bin": {
