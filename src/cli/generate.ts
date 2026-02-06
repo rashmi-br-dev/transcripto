@@ -304,7 +304,7 @@ async function getLanguageConfiguration() {
   console.log(chalk.yellow('🤖 Letting lingo.dev handle language selection completely automatically...'));
   
   // Use default configuration - only English for now, lingo.dev will add more
-  const outputDir = './src/i18n';
+  const outputDir = './i18n';  // Changed to root folder
   
   // Start with just English - lingo.dev will add target languages automatically
   const languages = ['en'];

@@ -42,7 +42,7 @@ const path_1 = __importDefault(require("path"));
 class I18nGenerator {
     constructor() {
         this.defaultConfig = {
-            outputDir: './src/i18n',
+            outputDir: './i18n', // Changed to root folder
             languages: ['en', 'hi', 'kn'],
             constantsFile: './src/i18n/constants.ts',
             keyPrefix: ''
@@ -77,9 +77,9 @@ class I18nGenerator {
         }
         // Let lingo.dev handle target languages automatically - don't specify any
         const config = {
-            source: './src/i18n/en.json',
+            source: './i18n/en.json', // Changed to root folder
             // target: [] - Let lingo.dev decide automatically
-            output: './src/i18n',
+            output: './i18n', // Changed to root folder
             format: 'json'
         };
         const content = JSON.stringify(config, null, 2);

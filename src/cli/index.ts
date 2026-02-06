@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { initCommand } from './init';
-import { scanCommand } from './scan';
-import { replaceCommand } from './replace';
 import { generateCommand } from './generate';
+import { initCommand } from './init';
+import { replaceCommand } from './replace';
 import { reportCommand } from './report';
+import { scanCommand } from './scan';
 import { watchCommand } from './watch';
+import { watchI18nCommand } from './watch-i18n';
 
 const program = new Command();
 
@@ -38,9 +39,14 @@ program
 
 program
   .command('watch')
-  .description('Watch for file changes and auto-update translations')
+  .description('Watch project files for changes and auto-generate i18n')
   .option('--yes', 'Run in non-interactive mode')
   .action(watchCommand);
+
+program
+  .command('watch-i18n')
+  .description('Watch i18n/en.json file for changes and auto-translate')
+  .action(watchI18nCommand);
 
 program
   .command('report')

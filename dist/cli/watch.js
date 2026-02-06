@@ -125,9 +125,9 @@ async function performFullWorkflow(yes) {
     // Generate i18n files using same config as generate command
     const generator = new i18nGenerator_1.I18nGenerator();
     const config = {
-        outputDir: './src/i18n',
+        outputDir: './i18n', // Changed to root folder
         languages: ['en'], // Start with just English, lingo.dev will add more
-        constantsFile: './src/i18n/constants.ts',
+        constantsFile: '', // No constants file needed
         keyPrefix: ''
     };
     await generator.generateI18nFiles(strings, config);

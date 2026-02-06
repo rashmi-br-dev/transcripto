@@ -2,12 +2,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const commander_1 = require("commander");
-const init_1 = require("./init");
-const scan_1 = require("./scan");
-const replace_1 = require("./replace");
 const generate_1 = require("./generate");
+const init_1 = require("./init");
+const replace_1 = require("./replace");
 const report_1 = require("./report");
+const scan_1 = require("./scan");
 const watch_1 = require("./watch");
+const watch_i18n_1 = require("./watch-i18n");
 const program = new commander_1.Command();
 program
     .name('devlingo')
@@ -32,9 +33,13 @@ program
     .action(generate_1.generateCommand);
 program
     .command('watch')
-    .description('Watch for file changes and auto-update translations')
+    .description('Watch project files for changes and auto-generate i18n')
     .option('--yes', 'Run in non-interactive mode')
     .action(watch_1.watchCommand);
+program
+    .command('watch-i18n')
+    .description('Watch i18n/en.json file for changes and auto-translate')
+    .action(watch_i18n_1.watchI18nCommand);
 program
     .command('report')
     .description('Show localization coverage report')
