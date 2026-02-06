@@ -206,7 +206,12 @@ export const LanguageDropdown: React.FC = () => {
   const currentLanguage = languages.find(l => l.code === currentLang);
 
   return (
-    <div style={{ position: 'relative', display: 'inline-block' }}>
+    <div style={{ 
+      position: 'fixed', 
+      top: '20px', 
+      right: '20px',
+      zIndex: 1000 
+    }}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         style={{
@@ -218,7 +223,8 @@ export const LanguageDropdown: React.FC = () => {
           fontSize: '14px',
           display: 'flex',
           alignItems: 'center',
-          gap: '8px'
+          gap: '8px',
+          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
         }}
       >
         <span>{currentLanguage?.flag}</span>
@@ -230,13 +236,14 @@ export const LanguageDropdown: React.FC = () => {
         <div style={{
           position: 'absolute',
           top: '100%',
-          left: '0',
+          right: '0',
           background: 'white',
           border: '1px solid #ddd',
           borderRadius: '6px',
           boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
           zIndex: 1000,
-          minWidth: '200px'
+          minWidth: '200px',
+          marginTop: '4px'
         }}>
           {languages.map(lang => (
             <button
@@ -273,8 +280,12 @@ export default LanguageDropdown;
   
   console.log(chalk.cyan('\n📋 How to use the language dropdown:'));
   console.log(chalk.white('1. Copy LanguageDropdown.tsx to your project'));
-  console.log(chalk.white('2. Import and add to your main page/layout'));
-  console.log(chalk.white('3. The dropdown will automatically switch languages and reload the page'));
+  console.log(chalk.white('2. Import and add to your main page/layout:'));
+  console.log(chalk.white('   import LanguageDropdown from "./components/LanguageDropdown";'));
+  console.log(chalk.white('3. Add to your App.tsx or layout:'));
+  console.log(chalk.white('   <LanguageDropdown />'));
+  console.log(chalk.white('4. The dropdown will automatically switch languages and reload page'));
+  console.log(chalk.white('5. Position: Fixed top-right corner for easy access'));
 }
 
 async function getLanguageConfiguration() {

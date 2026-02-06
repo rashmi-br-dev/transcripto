@@ -12,5 +12,6 @@ export declare class I18nGenerator {
     private generateTranslationFile;
     generateLingoDevConfig(targetLanguages?: string[]): Promise<void>;
     runLingoDev(): Promise<void>;
+    private initializeLingoDev;
 }
 //# sourceMappingURL=i18nGenerator.d.ts.map

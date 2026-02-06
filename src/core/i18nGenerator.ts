@@ -87,6 +87,16 @@ export type TextKey = keyof typeof TEXT;
   async runLingoDev(): Promise<void> {
     const { spawn } = await import('child_process');
     
+    // First, initialize lingo.dev if not already done
+    try {
+      await fs.access('i18n.json');
+      console.log('📁 lingo.dev already initialized');
+    } catch {
+      console.log('🔧 Initializing lingo.dev...');
+      await this.initializeLingoDev();
+    }
+    
+    // Then run lingo.dev
     return new Promise((resolve, reject) => {
       const process = spawn('npx', ['lingo.dev@latest', 'run'], {
         stdio: 'inherit',
@@ -98,6 +108,28 @@ export type TextKey = keyof typeof TEXT;
           resolve();
         } else {
           reject(new Error(`lingo.dev process exited with code ${code}`));
+        }
+      });
+
+      process.on('error', reject);
+    });
+  }
+
+  private async initializeLingoDev(): Promise<void> {
+    const { spawn } = await import('child_process');
+    
+    return new Promise((resolve, reject) => {
+      const process = spawn('npx', ['lingo.dev@latest', 'init'], {
+        stdio: 'inherit',
+        shell: true
+      });
+
+      process.on('close', (code) => {
+        if (code === 0) {
+          console.log('✅ lingo.dev initialized successfully');
+          resolve();
+        } else {
+          reject(new Error(`lingo.dev init failed with code ${code}`));
         }
       });
 
