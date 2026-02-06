@@ -1,0 +1,42 @@
+[
+  {
+    "text": "Welcome to My Application",
+    "key": "welcome_to_my_application",
+    "filePath": "D:\\devLingo2\\example\\src\\App.tsx",
+    "line": 6,
+    "column": 10,
+    "type": "jsx"
+  },
+  {
+    "text": "Please login to continue",
+    "key": "please_login_to_continue",
+    "filePath": "D:\\devLingo2\\example\\src\\App.tsx",
+    "line": 7,
+    "column": 9,
+    "type": "jsx"
+  },
+  {
+    "text": "Login",
+    "key": "login",
+    "filePath": "D:\\devLingo2\\example\\src\\App.tsx",
+    "line": 8,
+    "column": 14,
+    "type": "jsx"
+  },
+  {
+    "text": "Sign Up",
+    "key": "sign_up",
+    "filePath": "D:\\devLingo2\\example\\src\\App.tsx",
+    "line": 9,
+    "column": 14,
+    "type": "jsx"
+  },
+  {
+    "text": "Forgot Password?",
+    "key": "forgot_password",
+    "filePath": "D:\\devLingo2\\example\\src\\App.tsx",
+    "line": 10,
+    "column": 14,
+    "type": "jsx"
+  }
+]

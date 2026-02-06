@@ -1,0 +1,9 @@
+{
+  "source": "./src/i18n/en.json",
+  "target": [
+    "hi",
+    "kn"
+  ],
+  "output": "./src/i18n",
+  "format": "json"
+}

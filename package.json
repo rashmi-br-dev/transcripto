@@ -1,0 +1,43 @@
+{
+  "name": "devlingo",
+  "version": "1.0.0",
+  "description": "Automated localization CLI that scans projects and generates i18n files",
+  "main": "dist/index.js",
+  "bin": {
+    "devlingo": "dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/cli/index.ts",
+    "start": "node dist/cli/index.js"
+  },
+  "keywords": [
+    "i18n",
+    "localization",
+    "automation",
+    "cli",
+    "lingo.dev"
+  ],
+  "author": "DevLingo Team",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/generator": "^7.23.0",
+    "@babel/parser": "^7.23.0",
+    "@babel/traverse": "^7.23.0",
+    "@babel/types": "^7.23.0",
+    "chalk": "^4.1.2",
+    "commander": "^11.0.0",
+    "fs-extra": "^11.1.1",
+    "glob": "^10.3.0",
+    "inquirer": "^8.2.6"
+  },
+  "devDependencies": {
+    "@types/babel__generator": "^7.27.0",
+    "@types/babel__traverse": "^7.28.0",
+    "@types/fs-extra": "^11.0.1",
+    "@types/inquirer": "^9.0.3",
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  }
+}
