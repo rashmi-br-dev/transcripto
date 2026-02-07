@@ -8,7 +8,7 @@ import { StringExtractor } from '../core/stringExtractor';
 import { ExtractedString } from '../core/stringExtractor';
 
 export async function watchCommand(options: any): Promise<void> {
-  console.log(chalk.blue('👁️  Starting DevLingo file watcher...'));
+  console.log(chalk.blue('👁️  Starting Transcripto file watcher...'));
   
   const yes = options.yes || false;
   
@@ -46,7 +46,7 @@ export async function watchCommand(options: any): Promise<void> {
 
   // Handle process termination
   process.on('SIGINT', () => {
-    console.log(chalk.cyan('\n👋 Stopping DevLingo watcher...'));
+    console.log(chalk.cyan('\n👋 Stopping Transcripto watcher...'));
     watcher.close();
     process.exit(0);
   });
@@ -56,10 +56,10 @@ async function setupProject(yes: boolean): Promise<void> {
   try {
     // Check if project is initialized
     try {
-      await fs.access('.devlingo');
-      console.log(chalk.green('✅ DevLingo project already initialized'));
+      await fs.access('.transcripto');
+      console.log(chalk.green('✅ Transcripto project already initialized'));
     } catch {
-      console.log(chalk.yellow('🔧 Initializing DevLingo project...'));
+      console.log(chalk.yellow('🔧 Initializing Transcripto project...'));
       const { initCommand } = await import('./init');
       await initCommand();
     }
@@ -122,8 +122,8 @@ async function performFullWorkflow(yes: boolean): Promise<void> {
   }
 
   // Replace strings with constants
-  const replacer = new TextReplacer();
-  await replacer.replaceInFiles(strings);
+  // const replacer = new TextReplacer();
+  // await replacer.replaceInFiles(strings);
   
   console.log(chalk.green(`✅ Processed ${strings.length} strings`));
 }

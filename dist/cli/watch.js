@@ -44,7 +44,7 @@ const i18nGenerator_1 = require("../core/i18nGenerator");
 const projectScanner_1 = require("../core/projectScanner");
 const stringExtractor_1 = require("../core/stringExtractor");
 async function watchCommand(options) {
-    console.log(chalk_1.default.blue('👁️  Starting DevLingo file watcher...'));
+    console.log(chalk_1.default.blue('👁️  Starting Transcripto file watcher...'));
     const yes = options.yes || false;
     if (yes) {
         console.log(chalk_1.default.yellow('🤖 Running in non-interactive mode (--yes)'));
@@ -74,7 +74,7 @@ async function watchCommand(options) {
     });
     // Handle process termination
     process.on('SIGINT', () => {
-        console.log(chalk_1.default.cyan('\n👋 Stopping DevLingo watcher...'));
+        console.log(chalk_1.default.cyan('\n👋 Stopping Transcripto watcher...'));
         watcher.close();
         process.exit(0);
     });
@@ -83,11 +83,11 @@ async function setupProject(yes) {
     try {
         // Check if project is initialized
         try {
-            await fs_1.promises.access('.devlingo');
-            console.log(chalk_1.default.green('✅ DevLingo project already initialized'));
+            await fs_1.promises.access('.transcripto');
+            console.log(chalk_1.default.green('✅ Transcripto project already initialized'));
         }
         catch {
-            console.log(chalk_1.default.yellow('🔧 Initializing DevLingo project...'));
+            console.log(chalk_1.default.yellow('🔧 Initializing Transcripto project...'));
             const { initCommand } = await Promise.resolve().then(() => __importStar(require('./init')));
             await initCommand();
         }
@@ -139,6 +139,9 @@ async function performFullWorkflow(yes) {
     catch (error) {
         console.log(chalk_1.default.yellow('⚠️  lingo.dev failed, continuing...'));
     }
+    // Replace strings with constants
+    // const replacer = new TextReplacer();
+    // await replacer.replaceInFiles(strings);
     console.log(chalk_1.default.green(`✅ Processed ${strings.length} strings`));
 }
 //# sourceMappingURL=watch.js.map

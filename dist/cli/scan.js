@@ -22,7 +22,7 @@ async function scanCommand() {
         // Extract strings
         const strings = await extractor.extractStrings(files);
         // Save results
-        await fs_1.promises.writeFile('.devlingo/extracted-strings.json', JSON.stringify(strings, null, 2), 'utf-8');
+        await fs_1.promises.writeFile('.transcripto/extracted-strings.json', JSON.stringify(strings, null, 2), 'utf-8');
         console.log(chalk_1.default.green(`✅ Extracted ${strings.length} UI text strings`));
         if (strings.length > 0) {
             console.log(chalk_1.default.yellow('\n📝 Sample extracted strings:'));
@@ -35,8 +35,8 @@ async function scanCommand() {
             }
         }
         console.log(chalk_1.default.yellow('\n🎯 Next steps:'));
-        console.log(chalk_1.default.white('  devlingo generate - Generate i18n files from extracted strings'));
-        console.log(chalk_1.default.white('  devlingo replace  - Replace inline text with constants'));
+        console.log(chalk_1.default.white('  transcripto generate - Generate i18n files from extracted strings'));
+        console.log(chalk_1.default.white('  transcripto replace  - Replace inline text with constants'));
     }
     catch (error) {
         console.error(chalk_1.default.red('❌ Scan failed:'), error);
@@ -45,11 +45,11 @@ async function scanCommand() {
 }
 async function loadConfig() {
     try {
-        const configContent = await fs_1.promises.readFile('.devlingo/config.json', 'utf-8');
+        const configContent = await fs_1.promises.readFile('.transcripto/config.json', 'utf-8');
         return JSON.parse(configContent);
     }
     catch (error) {
-        console.warn(chalk_1.default.yellow('⚠️  No .devlingo/config.json found, using defaults'));
+        console.warn(chalk_1.default.yellow('⚠️  No .transcripto/config.json found, using defaults'));
         return {
             scan: {
                 extensions: ['.ts', '.tsx', '.js', '.jsx', '.html'],

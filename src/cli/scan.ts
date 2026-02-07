@@ -23,7 +23,7 @@ export async function scanCommand(): Promise<void> {
     
     // Save results
     await fs.writeFile(
-      '.devlingo/extracted-strings.json', 
+      '.transcripto/extracted-strings.json', 
       JSON.stringify(strings, null, 2), 
       'utf-8'
     );
@@ -43,8 +43,8 @@ export async function scanCommand(): Promise<void> {
     }
 
     console.log(chalk.yellow('\n🎯 Next steps:'));
-    console.log(chalk.white('  devlingo generate - Generate i18n files from extracted strings'));
-    console.log(chalk.white('  devlingo replace  - Replace inline text with constants'));
+    console.log(chalk.white('  transcripto generate - Generate i18n files from extracted strings'));
+    console.log(chalk.white('  transcripto replace  - Replace inline text with constants'));
 
   } catch (error) {
     console.error(chalk.red('❌ Scan failed:'), error);
@@ -54,10 +54,10 @@ export async function scanCommand(): Promise<void> {
 
 async function loadConfig() {
   try {
-    const configContent = await fs.readFile('.devlingo/config.json', 'utf-8');
+    const configContent = await fs.readFile('.transcripto/config.json', 'utf-8');
     return JSON.parse(configContent);
   } catch (error) {
-    console.warn(chalk.yellow('⚠️  No .devlingo/config.json found, using defaults'));
+    console.warn(chalk.yellow('⚠️  No .transcripto/config.json found, using defaults'));
     return {
       scan: {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.html'],

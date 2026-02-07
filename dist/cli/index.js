@@ -10,12 +10,12 @@ const watch_1 = require("./watch");
 const watch_i18n_1 = require("./watch-i18n");
 const program = new commander_1.Command();
 program
-    .name('devlingo')
+    .name('transcripto')
     .description('Automated localization CLI that scans projects and generates i18n files')
     .version('1.1.5');
 program
     .command('init')
-    .description('Initialize DevLingo in your project')
+    .description('Initialize Transcripto in your project')
     .option('--yes', 'Run in non-interactive mode')
     .action(init_1.initCommand);
 program

@@ -3,7 +3,7 @@ import path from 'path';
 import chalk from 'chalk';
 
 export async function initCommand(options: any = {}): Promise<void> {
-  console.log(chalk.blue('🚀 Initializing DevLingo in your project...'));
+  console.log(chalk.blue('🚀 Initializing Transcripto in your project...'));
   
   const yes = options.yes || false;
   
@@ -12,8 +12,8 @@ export async function initCommand(options: any = {}): Promise<void> {
   }
 
   try {
-    // Create .devlingo directory
-    await fs.mkdir('.devlingo', { recursive: true });
+    // Create .transcripto directory
+    await fs.mkdir('.transcripto', { recursive: true });
 
     // Create config file
     const config = {
@@ -37,7 +37,7 @@ export async function initCommand(options: any = {}): Promise<void> {
     };
 
     await fs.writeFile(
-      '.devlingo/config.json', 
+      '.transcripto/config.json', 
       JSON.stringify(config, null, 2), 
       'utf-8'
     );
@@ -46,7 +46,7 @@ export async function initCommand(options: any = {}): Promise<void> {
     await fs.mkdir('./src/i18n', { recursive: true });
 
     // Create initial i18n helper
-    const helperContent = `// DevLingo i18n helper
+    const helperContent = `// Transcripto i18n helper
 import { TEXT } from './constants';
 
 export function t(key: keyof typeof TEXT): string {
@@ -81,13 +81,13 @@ export type TextKey = keyof typeof TEXT;
       );
     }
 
-    console.log(chalk.green('✅ DevLingo initialized successfully!'));
-    console.log(chalk.gray('📁 Created .devlingo/config.json'));
+    console.log(chalk.green('✅ Transcripto initialized successfully!'));
+    console.log(chalk.gray('📁 Created .transcripto/config.json'));
     console.log(chalk.gray('📁 Created src/i18n/ directory structure'));
     console.log(chalk.yellow('\n🎯 Next steps:'));
-    console.log(chalk.white('  devlingo scan     - Scan for UI text strings'));
-    console.log(chalk.white('  devlingo generate - Generate i18n files'));
-    console.log(chalk.white('  devlingo replace  - Replace inline text with constants'));
+    console.log(chalk.white('  transcripto scan     - Scan for UI text strings'));
+    console.log(chalk.white('  transcripto generate - Generate i18n files'));
+    console.log(chalk.white('  transcripto replace  - Replace inline text with constants'));
 
   } catch (error) {
     console.error(chalk.red('❌ Initialization failed:'), error);

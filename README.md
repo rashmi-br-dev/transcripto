@@ -1,4 +1,4 @@
-# 🌐 DevLingo - Automated Localization CLI
+# 🌐 Transcripto - Automated Localization CLI
 
 **Intelligent React localization automation that scans projects, extracts UI text, and generates translations using AI.**
 
@@ -41,17 +41,17 @@
 ### ⚡ **5-Minute Setup**
 
 ```bash
-# 1. Install DevLingo
-npm install -g devlingo@latest
+# 1. Install Transcripto
+npm install -g transcripto-cli@latest
 
 # 2. Go to your React project
 cd my-react-app
 
 # 3. Generate initial translations
-devlingo generate
+transcripto generate
 
 # 4. Start auto-watcher (optional)
-devlingo watch-i18n
+transcripto watch-i18n
 ```
 
 ### 🎉 **You're done!**
@@ -66,12 +66,12 @@ devlingo watch-i18n
 
 ### 🌍 **Global Installation**
 ```bash
-npm install -g devlingo@latest
+npm install -g transcripto-cli@latest
 ```
 
 ### ✅ **Verify Installation**
 ```bash
-devlingo --version
+transcripto --version
 # Expected: 1.1.16+
 ```
 
@@ -87,7 +87,7 @@ devlingo --version
 
 ### 📝 **generate** - Generate translation files
 ```bash
-devlingo generate
+transcripto generate
 ```
 **What it does:**
 - 🔍 Scans project for UI text strings
@@ -98,7 +98,7 @@ devlingo generate
 
 ### 👁️ **watch-i18n** - Monitor & auto-translate
 ```bash
-devlingo watch-i18n
+transcripto watch-i18n
 ```
 **What it does:**
 - 👁️ Watches `i18n/en.json` for changes
@@ -108,16 +108,16 @@ devlingo watch-i18n
 
 ### 🔍 **scan** - Scan project only
 ```bash
-devlingo scan
+transcripto scan
 ```
 **What it does:**
 - 🔍 Scans project for UI text
 - 📊 Shows extraction report
-- 📝 Saves to `.devlingo/extracted-strings.json`
+- 📝 Saves to `.transcripto/extracted-strings.json`
 
 ### 📊 **report** - Show coverage report
 ```bash
-devlingo report
+transcripto report
 ```
 **What it does:**
 - 📊 Shows localization coverage
@@ -126,10 +126,10 @@ devlingo report
 
 ### 🚀 **init** - Initialize project
 ```bash
-devlingo init
+transcripto init
 ```
 **What it does:**
-- 📁 Creates `.devlingo/` config folder
+- 📁 Creates `.transcripto/` config folder
 - ⚙️ Sets up default configuration
 - 🎯 Prepares project for localization
 
@@ -137,7 +137,7 @@ devlingo init
 
 ## 📁 Project Structure
 
-### 📂 **After Running DevLingo**
+### 📂 **After Running Transcripto**
 ```
 my-project/
 ├── i18n/                    # 🌐 Translation files
@@ -149,7 +149,7 @@ my-project/
 │   ├── components/
 │   │   └── LanguageDropdown.tsx  # Auto-generated
 │   └── App.tsx
-├── .devlingo/               # 🔧 DevLingo config
+├── .transcripto/               # 🔧 Transcripto config
 │   └── extracted-strings.json
 ├── .lingodev.json           # 🤖 lingo.dev config
 └── package.json
@@ -186,7 +186,7 @@ my-project/
 cd my-react-app
 
 # Generate initial translations
-devlingo generate
+transcripto generate
 ```
 
 **Output:**
@@ -204,7 +204,7 @@ devlingo generate
 #### **Step 2: Start Auto-Watcher**
 ```bash
 # Start real-time monitoring
-devlingo watch-i18n
+transcripto watch-i18n
 ```
 
 **Output:**
@@ -242,7 +242,7 @@ vim i18n/en.json
 #### **Step 1: Build Translations**
 ```bash
 # Generate final translations
-devlingo generate
+transcripto generate
 
 # Verify all languages
 ls i18n/
@@ -339,7 +339,7 @@ function App() {
 ### ⚡ **Real-time Development**
 ```bash
 # Terminal 1: Start watcher
-devlingo watch-i18n
+transcripto watch-i18n
 
 # Terminal 2: Edit translations
 echo '{"new_string": "Brand new text"}' >> i18n/en.json
@@ -355,7 +355,7 @@ echo '{"new_string": "Brand new text"}' >> i18n/en.json
 ## ⚙️ Configuration
 
 ### 📝 **Default Settings**
-DevLingo works out of the box with smart defaults:
+Transcripto works out of the box with smart defaults:
 
 ```json
 {
@@ -385,8 +385,8 @@ const config = {
   keyPrefix: 'APP_'           // Custom prefix
 };
 
-// Use with DevLingo API
-import { I18nGenerator } from 'devlingo';
+// Use with Transcripto API
+import { I18nGenerator } from 'transcripto';
 
 const generator = new I18nGenerator();
 await generator.generateI18nFiles(strings, config);
@@ -397,7 +397,7 @@ await generator.generateI18nFiles(strings, config);
 ## 🔍 Advanced Features
 
 ### 🧠 **Smart String Filtering**
-DevLingo automatically excludes:
+Transcripto automatically excludes:
 
 **🚫 Technical Strings:**
 - CSS class names (`.app-header`, `.btn-primary`)
@@ -437,7 +437,7 @@ Uses chokidar for efficient file monitoring:
 #### **"No strings found"**
 ```bash
 # Problem
-devlingo generate
+transcripto generate
 ⚠️  No strings found
 
 # Solutions
@@ -446,7 +446,7 @@ ls src/
 # Should see App.tsx, components/, etc.
 
 # 2. Verify file extensions
-# DevLingo scans: .ts, .tsx, .js, .jsx
+# Transcripto scans: .ts, .tsx, .js, .jsx
 
 # 3. Check for text content
 # Ensure you have actual UI text strings
@@ -472,7 +472,7 @@ curl https://api.lingo.dev/status
 #### **"Auto-watcher not working"**
 ```bash
 # Problem
-devlingo watch-i18n
+transcripto watch-i18n
 📁 Monitoring: ./i18n/en.json
 # No response to file changes
 
@@ -491,10 +491,10 @@ echo '{"test": "test"}' > i18n/en.json
 ### 🔧 **Debug Mode**
 ```bash
 # Enable verbose logging
-DEBUG=devlingo devlingo generate
+DEBUG=transcripto transcripto generate
 
 # Check extraction details
-cat .devlingo/extracted-strings.json
+cat .transcripto/extracted-strings.json
 
 # Verify lingo.dev config
 cat .lingodev.json
@@ -507,15 +507,15 @@ cat .lingodev.json
 ### 🆘 **Getting Help**
 ```bash
 # Show all commands
-devlingo --help
+transcripto --help
 
 # Get help for specific command
-devlingo generate --help
-devlingo watch-i18n --help
+transcripto generate --help
+transcripto watch-i18n --help
 ```
 
 ### 🐛 **Reporting Issues**
-- **Bug Reports**: Include `devlingo --version` and error logs
+- **Bug Reports**: Include `transcripto --version` and error logs
 - **Feature Requests**: Welcome in discussions tab
 
 ### 🔧 **Contributing**
@@ -533,7 +533,7 @@ devlingo watch-i18n --help
 MIT License - Free for commercial and personal use
 
 ### 👥 **Credits**
-- **Created by**: DevLingo Team
+- **Created by**: Transcripto Team
 - **AI Translation**: lingo.dev integration
 - **File Watching**: chokidar library
 - **CLI Framework**: Commander.js
@@ -544,13 +544,13 @@ MIT License - Free for commercial and personal use
 
 ### 🚀 **One-Command Setup**
 ```bash
-npm install -g devlingo@latest && devlingo generate
+npm install -g transcripto-cli@latest && transcripto generate
 ```
 
 ### 🔄 **Development Loop**
 ```bash
 # Start watcher
-devlingo watch-i18n
+transcripto watch-i18n
 
 # Edit translations (in another terminal)
 vim i18n/en.json
@@ -561,7 +561,7 @@ vim i18n/en.json
 ### 📦 **Production Build**
 ```bash
 # Final translations
-devlingo generate
+transcripto generate
 
 # Deploy with confidence
 # All i18n/ files ready for production
@@ -569,8 +569,8 @@ devlingo generate
 
 ---
 
-**🌐 DevLingo - Intelligent Localization Automation**
+**🌐 Transcripto - Intelligent Localization Automation**
 
 *Transform your React app for global audiences in minutes, not hours.*
 
-**Install today:** `npm install -g devlingo@latest`
+**Install today:** `npm install -g transcripto-cli@latest`

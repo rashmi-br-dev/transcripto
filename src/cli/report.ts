@@ -66,7 +66,7 @@ async function generateReport(): Promise<ReportData> {
 }
 
 function displayReport(report: ReportData): void {
-  console.log(chalk.green('\n📈 DevLingo Localization Report'));
+  console.log(chalk.green('\n📈 Transcripto Localization Report'));
   console.log(chalk.gray('='.repeat(40)));
   
   console.log(chalk.white(`\n📝 Total Strings: ${report.totalStrings}`));
@@ -107,9 +107,9 @@ function displayReport(report: ReportData): void {
   console.log(chalk.white('\n💡 Recommendations:'));
   
   if (report.totalStrings === 0) {
-    console.log(chalk.yellow('  • Run "devlingo scan" to extract UI strings'));
+    console.log(chalk.yellow('  • Run "transcripto scan" to extract UI strings'));
   } else if (report.coverage < 100) {
-    console.log(chalk.yellow('  • Run "devlingo generate" to update translation files'));
+    console.log(chalk.yellow('  • Run "transcripto generate" to update translation files'));
   }
   
   if (report.missingTranslations.length > 0) {
@@ -123,7 +123,7 @@ function displayReport(report: ReportData): void {
 
 async function loadExtractedStrings(): Promise<ExtractedString[]> {
   try {
-    const content = await fs.readFile('.devlingo/extracted-strings.json', 'utf-8');
+    const content = await fs.readFile('.transcripto/extracted-strings.json', 'utf-8');
     return JSON.parse(content);
   } catch (error) {
     return [];
@@ -132,7 +132,7 @@ async function loadExtractedStrings(): Promise<ExtractedString[]> {
 
 async function loadConfig() {
   try {
-    const configContent = await fs.readFile('.devlingo/config.json', 'utf-8');
+    const configContent = await fs.readFile('.transcripto/config.json', 'utf-8');
     return JSON.parse(configContent);
   } catch (error) {
     return {

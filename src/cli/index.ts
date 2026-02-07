@@ -11,13 +11,13 @@ import { watchI18nCommand } from './watch-i18n';
 const program = new Command();
 
 program
-  .name('devlingo')
+  .name('transcripto')
   .description('Automated localization CLI that scans projects and generates i18n files')
   .version('1.1.5');
 
 program
   .command('init')
-  .description('Initialize DevLingo in your project')
+  .description('Initialize Transcripto in your project')
   .option('--yes', 'Run in non-interactive mode')
   .action(initCommand);
 

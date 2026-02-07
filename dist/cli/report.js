@@ -51,7 +51,7 @@ async function generateReport() {
     };
 }
 function displayReport(report) {
-    console.log(chalk_1.default.green('\n📈 DevLingo Localization Report'));
+    console.log(chalk_1.default.green('\n📈 Transcripto Localization Report'));
     console.log(chalk_1.default.gray('='.repeat(40)));
     console.log(chalk_1.default.white(`\n📝 Total Strings: ${report.totalStrings}`));
     console.log(chalk_1.default.white(`📁 Files Scanned: ${report.filesScanned}`));
@@ -86,10 +86,10 @@ function displayReport(report) {
     // Recommendations
     console.log(chalk_1.default.white('\n💡 Recommendations:'));
     if (report.totalStrings === 0) {
-        console.log(chalk_1.default.yellow('  • Run "devlingo scan" to extract UI strings'));
+        console.log(chalk_1.default.yellow('  • Run "transcripto scan" to extract UI strings'));
     }
     else if (report.coverage < 100) {
-        console.log(chalk_1.default.yellow('  • Run "devlingo generate" to update translation files'));
+        console.log(chalk_1.default.yellow('  • Run "transcripto generate" to update translation files'));
     }
     if (report.missingTranslations.length > 0) {
         console.log(chalk_1.default.yellow('  • Run "npx lingo.dev@latest run" to generate missing translations'));
@@ -100,7 +100,7 @@ function displayReport(report) {
 }
 async function loadExtractedStrings() {
     try {
-        const content = await fs_1.promises.readFile('.devlingo/extracted-strings.json', 'utf-8');
+        const content = await fs_1.promises.readFile('.transcripto/extracted-strings.json', 'utf-8');
         return JSON.parse(content);
     }
     catch (error) {
@@ -109,7 +109,7 @@ async function loadExtractedStrings() {
 }
 async function loadConfig() {
     try {
-        const configContent = await fs_1.promises.readFile('.devlingo/config.json', 'utf-8');
+        const configContent = await fs_1.promises.readFile('.transcripto/config.json', 'utf-8');
         return JSON.parse(configContent);
     }
     catch (error) {
