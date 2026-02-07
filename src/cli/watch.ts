@@ -5,7 +5,6 @@ import * as chokidar from 'chokidar';
 import { I18nGenerator } from '../core/i18nGenerator';
 import { ProjectScanner } from '../core/projectScanner';
 import { StringExtractor } from '../core/stringExtractor';
-import { TextReplacer } from '../core/replacer';
 import { ExtractedString } from '../core/stringExtractor';
 
 export async function watchCommand(options: any): Promise<void> {
@@ -122,9 +121,5 @@ async function performFullWorkflow(yes: boolean): Promise<void> {
     console.log(chalk.yellow('⚠️  lingo.dev failed, continuing...'));
   }
 
-  // Replace strings with constants
-  const replacer = new TextReplacer();
-  await replacer.replaceInFiles(strings);
-  
   console.log(chalk.green(`✅ Processed ${strings.length} strings`));
 }

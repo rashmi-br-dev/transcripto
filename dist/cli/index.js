@@ -4,7 +4,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const commander_1 = require("commander");
 const generate_1 = require("./generate");
 const init_1 = require("./init");
-const replace_1 = require("./replace");
 const report_1 = require("./report");
 const scan_1 = require("./scan");
 const watch_1 = require("./watch");
@@ -23,10 +22,6 @@ program
     .command('scan')
     .description('Scan project for UI text strings')
     .action(scan_1.scanCommand);
-program
-    .command('replace')
-    .description('Replace inline UI text with localization constants')
-    .action(replace_1.replaceCommand);
 program
     .command('generate')
     .description('Generate i18n translation files')

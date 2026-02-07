@@ -3,7 +3,6 @@
 import { Command } from 'commander';
 import { generateCommand } from './generate';
 import { initCommand } from './init';
-import { replaceCommand } from './replace';
 import { reportCommand } from './report';
 import { scanCommand } from './scan';
 import { watchCommand } from './watch';
@@ -26,11 +25,6 @@ program
   .command('scan')
   .description('Scan project for UI text strings')
   .action(scanCommand);
-
-program
-  .command('replace')
-  .description('Replace inline UI text with localization constants')
-  .action(replaceCommand);
 
 program
   .command('generate')

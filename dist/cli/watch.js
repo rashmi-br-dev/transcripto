@@ -43,7 +43,6 @@ const chokidar = __importStar(require("chokidar"));
 const i18nGenerator_1 = require("../core/i18nGenerator");
 const projectScanner_1 = require("../core/projectScanner");
 const stringExtractor_1 = require("../core/stringExtractor");
-const replacer_1 = require("../core/replacer");
 async function watchCommand(options) {
     console.log(chalk_1.default.blue('👁️  Starting DevLingo file watcher...'));
     const yes = options.yes || false;
@@ -140,9 +139,6 @@ async function performFullWorkflow(yes) {
     catch (error) {
         console.log(chalk_1.default.yellow('⚠️  lingo.dev failed, continuing...'));
     }
-    // Replace strings with constants
-    const replacer = new replacer_1.TextReplacer();
-    await replacer.replaceInFiles(strings);
     console.log(chalk_1.default.green(`✅ Processed ${strings.length} strings`));
 }
 //# sourceMappingURL=watch.js.map
