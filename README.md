@@ -575,7 +575,3 @@ devlingo generate
 *Transform your React app for global audiences in minutes, not hours.*
 
 **Install today:** `npm install -g devlingo@latest`
-
-**Documentation:** [Full docs at devlingo.dev/docs]
-
-**Community:** [Join our Discord community](https://discord.gg/devlingo)
