@@ -515,7 +515,6 @@ devlingo watch-i18n --help
 ```
 
 ### 🐛 **Reporting Issues**
-- **GitHub Issues**: [github.com/your-repo/devlingo/issues]
 - **Bug Reports**: Include `devlingo --version` and error logs
 - **Feature Requests**: Welcome in discussions tab
 
