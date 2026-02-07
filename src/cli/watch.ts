@@ -121,5 +121,9 @@ async function performFullWorkflow(yes: boolean): Promise<void> {
     console.log(chalk.yellow('⚠️  lingo.dev failed, continuing...'));
   }
 
+  // Replace strings with constants
+  const replacer = new TextReplacer();
+  await replacer.replaceInFiles(strings);
+  
   console.log(chalk.green(`✅ Processed ${strings.length} strings`));
 }
